@@ -1,4 +1,5 @@
 import { FaGooglePlay, FaApple } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -23,19 +24,53 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold md:px-10">Company</h3>
             <ul className="text-gray-400 mt-2 space-y-2 md:px-10">
-              <li>About</li>
-              <li>News</li>
-              <li>Shop</li>
-              <li>Contact</li>
+              <li>
+                <NavLink to="/about" className="hover:text-white transition">
+                  About
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/services" className="hover:text-white transition">
+                  Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" className="hover:text-white transition">
+                  Contact
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/product" className="hover:text-white transition">
+                  Product
+                </NavLink>
+              </li>
+
             </ul>
           </div>
           <div>
             <h3 className="text-lg font-semibold md:px-10">Support</h3>
             <ul className="text-gray-400 mt-2 space-y-2 md:px-10">
-              <li>FAQs</li>
-              <li>Returns</li>
-              <li>Shipping</li>
-              <li>Track Order</li>
+              <li>
+                <NavLink to="/faqs" className="hover:text-white transition">
+                  FAQs
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/cart" className="hover:text-white transition">
+                  Cart
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/orders" className="hover:text-white transition">
+                  Orders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/services" className="hover:text-white transition">
+                  Support
+                </NavLink>
+              </li>
+
             </ul>
           </div>
         </div>
@@ -44,10 +79,10 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold md:px-10">Legal</h3>
           <ul className="text-gray-400 mt-2 space-y-2 md:px-10">
-            <li>Terms & Conditions</li>
-            <li>Privacy Policy</li>
-            <li>Cookies</li>
-            <li>Report Issue</li>
+            <li><NavLink to="/legal#terms" className="hover:text-white transition">Terms & Conditions</NavLink></li>
+            <li><NavLink to="/legal#privacy" className="hover:text-white transition">Privacy Policy</NavLink></li>
+            <li><NavLink to="/legal#cookies" className="hover:text-white transition">Cookies</NavLink></li>
+            <li><NavLink to="/legal#report" className="hover:text-white transition">Report Issue</NavLink></li>
           </ul>
         </div>
       </div>

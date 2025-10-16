@@ -1,76 +1,173 @@
- import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { NavLink, useNavigate } from "react-router-dom";
+// import { useAuth } from "../App";
+// import { FaBars, FaTimes, FaShoppingCart, FaClipboardList } from "react-icons/fa";
+
+// const Navbar = () => {
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const { isAuthenticated, logout } = useAuth();
+//   const navigate = useNavigate();
+
+//   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+//   const handleLogout = () => {
+//     logout();
+//     navigate("/");
+//   };
+
+//   const navItems = [
+//     {name:"Product", path:"/product"},
+//     { name: "Cart", path: "/dashboard/cart", icon: <FaShoppingCart className="inline ml-1" /> },
+//   { name: "Orders", path: "/dashboard/orders", icon: <FaClipboardList className="inline ml-1" /> },
+//   { name: "Profile", path: "/dashboard/profile" },
+//   ];
+
+//   return (
+//     <header className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-yellow-100 shadow-sm transition-all duration-300">
+//       <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+//         {/* Logo */}
+//         <NavLink
+//           to="/dashboard"
+//           className="text-2xl font-serif font-bold text-slate-900 hover:text-yellow-600 transition-colors"
+//         >
+//           <span className="text-yellow-500">Savitri</span> Jewels
+//         </NavLink>
+
+//         {/* Hamburger */}
+//         <button
+//           className="lg:hidden text-slate-700 hover:text-yellow-600 transition-colors focus:outline-none"
+//           onClick={toggleMenu}
+//         >
+//           {isMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+//         </button>
+
+//         {/* Links */}
+//         <div
+//           className={`absolute lg:static top-full left-0 w-full lg:w-auto bg-white/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-0 flex flex-col lg:flex-row items-center gap-6 py-5 lg:py-0 px-6 lg:px-0 transition-all duration-300 ease-in-out ${
+//             isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 lg:opacity-100 pointer-events-none lg:pointer-events-auto"
+//           }`}
+//         >
+//           {navItems.map((item) => (
+//             <NavLink
+//               key={item.name}
+//               to={item.path}
+//               className={({ isActive }) =>
+//                 `font-medium text-slate-700 hover:text-yellow-600 transition-colors duration-200 ${
+//                   isActive ? "text-yellow-600 font-semibold" : ""
+//                 }`
+//               }
+//               onClick={() => setIsMenuOpen(false)}
+//             >
+//               {item.name} {item.icon && item.icon}
+//             </NavLink>
+//           ))}
+
+//           {isAuthenticated && (
+//             <button
+//               onClick={handleLogout}
+//               className="font-medium text-slate-700 hover:text-yellow-600 transition-colors duration-200"
+//             >
+//               Logout
+//             </button>
+//           )}
+//         </div>
+//       </nav>
+//     </header>
+//   );
+// };
+
+// export default Navbar;
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../App"; // Import Auth Context
-
-import "./header.css";
-
+import { useAuth } from "../App";
+import { FaShoppingCart, FaClipboardList, FaUser, FaTimes, FaBars ,FaGem} from "react-icons/fa";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { logout } = useAuth(); // Get logout function from context
-    const navigate = useNavigate(); // React Router hook for navigation
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-    const handleLogout = () => {
-        logout(); // Set authentication to false
-        navigate("/"); // Redirect to Home (which will show Header)
-    };
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
-    return (
-        <header className="top">
-            <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
-                <NavLink to="/" className="text-yellow-500 text-lg font-bold">
-                    <span className="text-yellow-600">Savitri</span>Jewels
-                </NavLink>
+  // Nav items (icons only)
+  const navItems = [
+    { name: "Products", path: "/product", icon: <FaGem className="text-2xl" /> },
+    { name: "Cart", path: "/dashboard/cart", icon: <FaShoppingCart className="text-2xl" /> },
+    { name: "Orders", path: "/dashboard/orders", icon: <FaClipboardList className="text-2xl" /> },
+    { name: "Profile", path: "/dashboard/profile", icon: <FaUser className="text-2xl" /> },
+  ];
 
-                <button
-                    className="lg:hidden text-yellow-500 focus:outline-none"
-                    aria-label="Toggle Menu"
-                    onClick={toggleMenu}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M4 6h16M4 12h16m-7 6h7"
-                        />
-                    </svg>
-                </button>
+  return (
+    <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200">
+      <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-2 lg:py-2">
+        {/* Logo */}
+        <NavLink
+          to="/dashboard"
+          className="text-2xl font-serif font-bold text-slate-900 hover:text-yellow-600 transition-colors"
+        >
+          <span className="text-yellow-500">Savitri</span> Jewels
+        </NavLink>
 
-                <div className={`lg:flex space-x-8 ${isMenuOpen ? "block" : "hidden"} w-full lg:w-auto`}>
-                    {/* <NavLink to="/" className="block lg:inline-block text-yellow-500 hover:text-yellow-600">
-                        Home
-                    </NavLink>
-                    <NavLink to="/about" className="block lg:inline-block text-yellow-500 hover:text-yellow-600">
-                        About
-                    </NavLink>
-                    <NavLink to="/product" className="block lg:inline-block text-yellow-500 hover:text-yellow-600">
-                        Product
-                    </NavLink>
-                    <NavLink to="/carts" className="block lg:inline-block text-yellow-500 hover:text-yellow-600">
-                        Carts
-                    </NavLink>
-                    <NavLink to="/orders" className="block lg:inline-block text-yellow-500 hover:text-yellow-600">
-                        Orders
-                    </NavLink> */}
-                    {/* Logout Button */}
-                    <button onClick={handleLogout} className="block lg:inline-block text-yellow-500 hover:text-yellow-600">
-                        Logout
-                    </button>
-                </div>
-            </nav>
-        </header>
-    );
+        {/* Hamburger Menu (Mobile) */}
+        <button
+          className="lg:hidden text-slate-700 hover:text-yellow-600 transition-colors focus:outline-none"
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+        </button>
+
+        {/* Nav Items */}
+        <div
+          className={`absolute lg:static top-full left-0 w-full lg:w-auto bg-white/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-0 flex flex-col lg:flex-row items-center gap-4 py-4 lg:py-0 px-6 lg:px-0 transition-all duration-300 ease-in-out ${
+            isMenuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 lg:opacity-100 pointer-events-none lg:pointer-events-auto"
+          }`}
+        >
+          {navItems.map((item, index) => (
+            <div key={index}>
+              <NavLink
+                to={item.path}
+                data-tooltip-id={`nav-tip-${index}`}
+                data-tooltip-content={item.name}
+                className={({ isActive }) =>
+                  `p-3 rounded-full transition-all duration-200 flex justify-center items-center ${
+                    isActive
+                      ? "bg-yellow-400 text-white shadow-md"
+                      : "text-gray-600 hover:text-yellow-600 hover:bg-yellow-100"
+                  }`
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.icon}
+              </NavLink>
+              <Tooltip id={`nav-tip-${index}`} place="bottom" />
+            </div>
+          ))}
+
+          {/* Logout Button */}
+          {isAuthenticated && (
+            <button
+              onClick={handleLogout}
+              data-tooltip-id="logout-tip"
+              data-tooltip-content="Logout"
+              className="p-3 rounded-full text-gray-600 hover:text-yellow-600 hover:bg-yellow-100 transition-all duration-200 flex justify-center items-center"
+            >
+              <FaTimes className="text-xl" />
+              <Tooltip id="logout-tip" place="bottom" />
+            </button>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
 };
 
 export default Navbar;

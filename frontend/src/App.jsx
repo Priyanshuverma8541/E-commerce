@@ -1,34 +1,35 @@
-// App.jsx
+
+
+
+
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-  Outlet,
-}
-from "react-router-dom";
+} from "react-router-dom";
 import { useState, createContext, useContext, useEffect } from "react";
 import axios from "axios";
+import FAQs from "./components/FAQs";
 import Home from "./components/Home";
 import About from "./components/About";
 import Error from "./components/Error";
 import Login from "./components/Login";
 import Product from "./components/Product";
 import Registration from "./components/Registration";
-import Navbar from "./components/Navbar";
-import Order from "./components/Order";
-import Cart from "./components/Cart";
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
-import Header from "./components/Header";
-import Slider from "./components/Slider";
-import Footer from "./components/Footer";
-import Section from "./components/Section";
+import Order from "./components/Order";
+import Cart from "./components/Cart";
 import Contact from "./components/Contact";
 import Services from "./components/Services";
+import Legal from "./components/Legal";
+
+import DefaultLayout from "./components/defaultLayout/defaultLayout";
 import CartProvider from "./components/CartProvider";
 
-// 👇 AuthContext & Provider
+// 👇 Auth Context
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
@@ -42,7 +43,6 @@ const AuthProvider = ({ children }) => {
       return null;
     }
   });
-  const [loading, setLoading] = useState(true);
   const isAuthenticated = !!token;
 
   useEffect(() => {
@@ -57,23 +57,15 @@ const AuthProvider = ({ children }) => {
         logout();
       }
     }
-    setLoading(false);
   }, []);
-  // const back=`savitri-jewellers-backend.onrender.com`
-
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post("http://localhost:8080/api/users/login", {
-        email,
-        password,
-      });
-
+      const response = await axios.post("http://localhost:8080/api/users/login", { email, password });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("userId", user._id);
-
       setToken(token);
       setUser(user);
     } catch (err) {
@@ -91,48 +83,44 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ token, user, isAuthenticated, login, logout }}>
-      {!loading ? children : <p>Loading...</p>}
+      {children}
     </AuthContext.Provider>
   );
 };
 
+// Protected Route
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
-const PublicLayout = () => (
-  <>
-    <Header />
-    <Outlet />
-    <Section />
-    <Footer />
-  </>
-);
-
 const App = () => {
-
   return (
+
+
     <AuthProvider>
       <CartProvider>
         <Router>
           <Routes>
-            <Route element={<PublicLayout />}>
+            {/* Public Pages */}
+            <Route element={<DefaultLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/product" element={<Product />} />
-              <Route path="/login" element={<Login />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/error" element={<Error />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/registration" element={<Registration />} />
+              <Route path="/faqs" element={<FAQs />} />
+              <Route path="/legal" element={<Legal />} />
+              <Route path="*" element={<Error />} />
             </Route>
 
+            {/* Protected Dashboard */}
             <Route
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <Navbar/> 
                   <Dashboard />
                 </ProtectedRoute>
               }
@@ -141,9 +129,8 @@ const App = () => {
               <Route path="cart" element={<Cart />} />
               <Route path="orders" element={<Order />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="faqs" element={<FAQs />} />
             </Route>
-
-            <Route path="*" element={<Error />} />
           </Routes>
         </Router>
       </CartProvider>

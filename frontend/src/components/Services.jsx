@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Services = () => {
   const services = [
@@ -35,29 +36,43 @@ const Services = () => {
   ];
 
   return (
-    <div className="bg-gray-100 py-12 mt-12"
-    style={{
-    backgroundImage: "url('https://plus.unsplash.com/premium_photo-1746025617433-5f20cbd3b36b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fGJyb3duJTIwY29sb3VyJTVDfGVufDB8fDB8fHww')",
-  }}>
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="bg-[#fff4e3] py-20">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4"
+        >
           Our Jewelry Services
-        </h2>
-        <p className="text-center text-white mb-12">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-slate-700 mb-12 text-lg md:text-xl"
+        >
           Offering premium services for our customers in Buxar, Bihar & Varanasi, UP.
-        </p>
-        <div className="grid md:grid-cols-3 gap-8">
+        </motion.p>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white shadow-md rounded-lg p-6 text-center transform hover:scale-105 transition duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2, duration: 0.8 }}
+              className="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold text-white mb-2">
+              <div className="text-5xl mb-4">{service.icon}</div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">
                 {service.title}
               </h3>
-              <p className="text-gray-600">{service.description}</p>
-            </div>
+              <p className="text-slate-700">{service.description}</p>
+            </motion.div>
           ))}
         </div>
       </div>
