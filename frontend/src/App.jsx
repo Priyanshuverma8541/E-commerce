@@ -27,7 +27,9 @@ import Services from "./components/Services";
 import Legal from "./components/Legal";
 
 import DefaultLayout from "./components/defaultLayout/defaultLayout";
-import CartProvider from "./components/CartProvider";
+import CartProvider from "./components/CartProvider"; 
+
+import ScrollToHashElement from "./components/ScrollToHashElement";
 
 // 👇 Auth Context
 const AuthContext = createContext();
@@ -97,10 +99,11 @@ const ProtectedRoute = ({ children }) => {
 const App = () => {
   return (
 
-
+    
     <AuthProvider>
       <CartProvider>
         <Router>
+        <ScrollToHashElement />
           <Routes>
             {/* Public Pages */}
             <Route element={<DefaultLayout />}>

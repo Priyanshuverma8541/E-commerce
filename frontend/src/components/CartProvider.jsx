@@ -58,7 +58,7 @@ const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.delete(
-        `localhost:8080/api/carts/remove/${userId}/${productId}`,
+        `http://localhost:8080/api/carts/remove/${userId}/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -104,10 +104,44 @@ connectDB();
 connectCloudinary();
 
 // Start Server
-const server = app.listen(PORT, () => {
+const http = require("http");
+const { Server } = require("socket.io");
+
+const server = http.createServer(app); // ✅ Replace app.listen
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"]
+    }
+});
+
+// ✅ Socket.io configuration
+io.on("connection", (socket) => {
+    console.log("✅ Socket connected:", socket.id);
+
+    // Join user room
+    socket.on("joinUserRoom", (userId) => {
+        socket.join(userId);
+        console.log(`✅ User joined room: ${userId}`);
+    });
+
+    // Listen for order updates
+    socket.on("orderStatusChanged", ({ userId, updatedOrder }) => {
+        io.to(userId).emit("orderUpdated", updatedOrder);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("❌ Socket disconnected:", socket.id);
+    });
+});
+
+// Start Server
+server.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
 
+// Export io for routes
+module.exports = io;
 // Graceful Shutdown
 const shutdown = async () => {
     console.log("🛑 Server shutting down...");

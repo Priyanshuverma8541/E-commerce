@@ -51,7 +51,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold md:px-10">Support</h3>
             <ul className="text-gray-400 mt-2 space-y-2 md:px-10">
               <li>
-                <NavLink to="/faqs" className="hover:text-white transition">
+                <NavLink to="/faqs#faqs" className="hover:text-white transition">
                   FAQs
                 </NavLink>
               </li>
