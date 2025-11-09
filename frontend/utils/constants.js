@@ -1,1 +1,1 @@
-BASE_URL='http://localhost:8080'
+BASE_URL='https://savitri-jewellers-backend-h6vb.onrender.com';

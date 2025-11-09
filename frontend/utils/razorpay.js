@@ -1,5 +1,5 @@
 // export const handlePayment = async (amount) => {
-//     const res = await fetch("http://localhost:8080/api/payment/create-order", {
+//     const res = await fetch("${API}/api/payment/create-order", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -17,7 +17,7 @@
 //       description: "Purchase from Savitri Jewellers",
 //       order_id: data.id,
 //       handler: async (response) => {
-//         const verifyRes = await fetch("http://localhost:8080/api/payment/verify", {
+//         const verifyRes = await fetch("${API}/api/payment/verify", {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
 //           body: JSON.stringify(response),
@@ -33,7 +33,7 @@
 //     rzp.open();
 //   };
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com"
 export const handlePayment = (orderData, onSuccess) => {
   const { rpOrder, order } = orderData;
 
@@ -54,7 +54,7 @@ export const handlePayment = (orderData, onSuccess) => {
         const token = localStorage.getItem("token");
 
         const verifyRes = await axios.post(
-          "http://localhost:8080/api/payment/verify",
+          `${API}/api/payment/verify`,
           { ...response, orderId: order._id },
           {
             headers: { Authorization: `Bearer ${token}` },

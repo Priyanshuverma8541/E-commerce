@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../App";
 import { motion } from "framer-motion";
-
+const API = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

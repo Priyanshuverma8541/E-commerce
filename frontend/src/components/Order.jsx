@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import io from "socket.io-client";
 import { useAuth } from "../App";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_BASE = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com";
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || API_BASE;
 const steps = ["ordered", "processing", "shipped", "delivered"];
 

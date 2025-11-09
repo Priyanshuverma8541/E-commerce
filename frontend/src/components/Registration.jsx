@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
+const API = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com"
 const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ const Registration = () => {
 
     setLoading(true);
     try {
-      await axios.post("http://localhost:8080/api/users/register", {
+      await axios.post(`${API}/api/users/register`, {
         name,
         email,
         password,

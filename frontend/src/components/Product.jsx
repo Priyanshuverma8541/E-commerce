@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuth } from "../App";
 import { useCart } from "./CartProvider"; // ✅ Use the custom hook
 // const back=`https://savitri-jewellers-backend.onrender.com`
+const API = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com"
 
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,7 @@ const Product = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/products");
+        const response = await axios.get(`${API}/api/products`);
         setProducts(response.data);
       } catch (err) {
         setError("Failed to load products");

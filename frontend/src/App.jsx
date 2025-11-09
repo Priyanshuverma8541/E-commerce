@@ -30,7 +30,7 @@ import DefaultLayout from "./components/defaultLayout/defaultLayout";
 import CartProvider from "./components/CartProvider"; 
 
 import ScrollToHashElement from "./components/ScrollToHashElement";
-
+const API = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com"
 // 👇 Auth Context
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post("http://localhost:8080/api/users/login", { email, password });
+      const response = await axios.post(`${API}/api/users/login`, { email, password });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));

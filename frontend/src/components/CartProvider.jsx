@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../App"; // 🔁 adjust path if your AuthContext is in another file
-
+const API = import.meta.env.VITE_API_URL || "https://savitri-jewellers-backend-h6vb.onrender.com"
 // const back=`https://savitri-jewellers-backend.onrender.com`
 
 const CartContext = createContext();
@@ -19,7 +19,7 @@ const CartProvider = ({ children }) => {
     if (!userId || !token) return;
 
     try {
-      const response = await axios.get(`http://localhost:8080/api/carts/${userId}`, {
+      const response = await axios.get(`${API}/api/carts/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/carts/add/${userId}`,
+        `${API}/api/carts/add/${userId}`,
         { productId, quantity },
         {
           headers: {
@@ -58,7 +58,7 @@ const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/carts/remove/${userId}/${productId}`,
+        `${API}/api/carts/remove/${userId}/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
