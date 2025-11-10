@@ -203,7 +203,7 @@ async function connectDB() {
 // Allow both local and deployed frontend
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://savitri-jewellers.onrender.com"
+    "https://savitri-jewellers-frontend-9o6p.onrender.com"
 ];
 
 app.use(
