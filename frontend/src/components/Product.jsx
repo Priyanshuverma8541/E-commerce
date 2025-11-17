@@ -48,7 +48,15 @@ const Product = () => {
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-20">
+    <section className="
+  grid 
+  grid-cols-2        
+  sm:grid-cols-2
+  md:grid-cols-3
+  lg:grid-cols-4
+  gap-4 
+  mt-20 
+  px-4">
       {products.map((product) => (
         <div key={product._id} className="bg-white p-4 shadow-lg rounded-lg text-center">
           <img
